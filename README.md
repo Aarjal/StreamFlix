@@ -6,6 +6,13 @@ A simple movie-style website built with **PHP**, **MySQL**, **HTML/CSS**, and **
 
 - Multi-page PHP website (Home, Movies, Plans, Login)
 - Session-based login/logout flow
+- CSRF-protected login form
+- Remember username option on login page
+- Active navigation + additional pages (Profile, Feedback, FAQs)
+- Movie filtering by title/genre with sorting options
+- Plan billing switch (monthly/yearly)
+- Improved UI consistency for form controls, dropdowns, and navigation states
+- More-menu dropdown appears on hover/focus (not always expanded)
 - Demo user for quick testing
 - Reusable shared components (`head.php`, `nav.php`, `session.php`)
 - Basic frontend interactions via JavaScript
@@ -23,10 +30,13 @@ A simple movie-style website built with **PHP**, **MySQL**, **HTML/CSS**, and **
 index.php                 # Entry point (redirects to home page)
 src/
 	pages/                  # UI pages
+		faq.php
+		feedback.php
 		home.php
 		login.php
 		movies.php
 		plans.php
+		profile.php
 	php/                    # Backend logic and shared includes
 		db.php
 		head.php
@@ -93,7 +103,6 @@ Serve the project with a PHP server (Apache/XAMPP or built-in PHP server), then 
 
 ## Future Improvements
 
-- Add registration page
-- Add form validation and CSRF protection
+- Save feedback and plan selections through backend handlers
 - Move DB secrets to environment variables
-- Add responsive enhancements and accessibility improvements
+- Add registration and password reset flows

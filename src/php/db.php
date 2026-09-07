@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-$host = '127.0.0.1';
-$dbName = 'streamflix';
-$dbUser = 'root';
-$dbPass = '';
+$host = 'sql311.infinityfree.com';
+$dbName = 'if0_41392703_data_projector';
+$dbUser = 'if0_41392703';
+$dbPass = '(Your vPanel Password)';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host={$host};dbname={$dbName};charset={$charset}";

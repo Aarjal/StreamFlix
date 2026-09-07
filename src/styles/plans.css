@@ -1,50 +1,110 @@
 .plans-page {
-    background: linear-gradient(rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.62)),
+    background: linear-gradient(120deg, rgba(7, 10, 18, 0.88), rgba(10, 14, 24, 0.82)),
         url("../../assets/images/planbg.jpg") no-repeat center center fixed;
     background-size: cover;
 }
 
 .plans-section {
-    padding: 50px 20px;
+    padding: 50px 20px 64px;
     text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .plans-section h1 {
-    font-size: 42px;
-    margin-bottom: 40px;
-    color: #ddd1d3;
+    font-size: clamp(2rem, 5vw, 2.9rem);
+    margin-bottom: 12px;
+    color: #edf3ff;
+}
+
+.subtitle {
+    margin-bottom: 18px;
+    color: #c5d7ef;
+}
+
+.billing-toggle {
+    display: inline-flex;
+    background: rgba(14, 12, 12, 0.78);
+    border: 1px solid rgba(84, 174, 196, 0.55);
+    border-radius: 999px;
+    padding: 4px;
+    margin-bottom: 28px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.billing-button {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: #d5e8ee;
+    border-radius: 999px;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.billing-button.active {
+    background: linear-gradient(135deg, rgba(211, 41, 41, 0.95), rgba(176, 30, 30, 0.95));
+    color: #fff;
+}
+
+.billing-button:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.billing-button:focus-visible {
+    outline: 2px solid #9de3f2;
+    outline-offset: 2px;
 }
 
 .plans-container {
     display: flex;
     justify-content: center;
-    gap: 24px;
+    gap: 22px;
     flex-wrap: wrap;
+    margin-top: 10px;
 }
 
 .plan-card {
-    background-color: rgba(12, 10, 10, 0.6);
+    background: linear-gradient(165deg, rgba(16, 22, 35, 0.88), rgba(12, 17, 29, 0.78));
     padding: 30px;
     width: 280px;
-    border-radius: 20px;
-    border: 2px solid #54aec4;
-    transition: transform 0.4s ease, background-color 0.4s ease;
+    border-radius: 16px;
+    border: 1px solid rgba(94, 196, 221, 0.56);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.34);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .plan-card:hover {
-    transform: scale(1.05);
-    background-color: rgba(41, 34, 34, 0.8);
+    transform: translateY(-6px);
+    box-shadow: 0 22px 38px rgba(0, 0, 0, 0.4);
+    border-color: rgba(94, 196, 221, 0.78);
+}
+
+.plan-card.highlighted {
+    border-color: rgba(255, 128, 128, 0.8);
+}
+
+.badge {
+    display: inline-block;
+    margin-bottom: 10px;
+    background: rgba(84, 174, 196, 0.25);
+    border: 1px solid rgba(84, 174, 196, 0.8);
+    border-radius: 999px;
+    padding: 5px 10px;
+    font-size: 0.82rem;
+    color: #bcebf7;
 }
 
 .plan-card h2 {
-    font-size: 28px;
+    font-size: 1.7rem;
     margin-bottom: 10px;
-    color: #ec5252;
+    color: #f06c6c;
 }
 
 .price {
     font-size: 24px;
-    color: #54aec4;
+    color: #8edff2;
     margin-bottom: 20px;
 }
 
@@ -64,24 +124,53 @@
 .plan-card .buy-now {
     margin-top: 20px;
     display: inline-block;
-    background-color: #f50909;
+    background: linear-gradient(135deg, #e53a3a, #b92525);
     color: white;
     padding: 10px 20px;
     border: none;
-    border-radius: 30px;
+    border-radius: 10px;
     font-weight: bold;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 10px 18px rgba(229, 58, 58, 0.24);
+    transition: transform 0.25s ease, filter 0.25s ease;
     text-decoration: none;
 }
 
 .plan-card .buy-now:hover {
-    background-color: #cc7676;
-    transform: scale(1.05);
+    transform: translateY(-2px);
+    filter: brightness(1.08);
 }
 
 #plan-message {
     width: fit-content;
     margin: 24px auto 0;
+}
+
+.faq-layout {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.faq-list {
+    display: grid;
+    gap: 12px;
+    text-align: left;
+}
+
+.faq-list details {
+    background: linear-gradient(160deg, rgba(16, 22, 35, 0.86), rgba(12, 17, 29, 0.78));
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 12px;
+    padding: 14px 16px;
+}
+
+.faq-list summary {
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.faq-list p {
+    margin-top: 10px;
+    color: #e8eef0;
 }

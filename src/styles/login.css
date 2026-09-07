@@ -1,6 +1,5 @@
 .login-page {
-    background: linear-gradient(rgba(0, 0, 0, 0.58), rgba(0, 0, 0, 0.58)),
-    url("../../assets/images/loginbg.jpg") center / cover no-repeat fixed;
+    background: linear-gradient(120deg, rgba(6, 10, 18, 0.86), rgba(13, 14, 24, 0.76)), url("../../assets/images/loginbg.jpg") center / cover no-repeat fixed;
 }
 
 .login-page .body {
@@ -13,14 +12,17 @@
 }
 
 .login-page h1 {
-    font-size: 2.5rem;
-    margin-bottom: 18px;
-    color: #e6e0e7;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    margin-bottom: 20px;
+    color: #edf2ff;
 }
 
 .form-container {
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 16px;
+    background: linear-gradient(160deg, rgba(12, 18, 31, 0.86), rgba(10, 12, 20, 0.78));
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 18px;
+    box-shadow: 0 24px 40px rgba(0, 0, 0, 0.38);
+    backdrop-filter: blur(8px);
     padding: 30px;
     width: min(500px, 90vw);
 }
@@ -32,7 +34,7 @@
 
 .input-group label {
     font-size: 1rem;
-    color: #d5e8ee;
+    color: #dbe8ff;
     font-weight: 600;
 }
 
@@ -41,8 +43,8 @@
     margin-top: 8px;
     padding: 12px 14px;
     border-radius: 12px;
-    border: 2px solid #54aec4;
-    background: rgba(22, 20, 20, 0.8);
+    border: 1px solid rgba(94, 196, 221, 0.6);
+    background: rgba(8, 12, 20, 0.8);
     color: #fff;
     font-size: 0.95rem;
 }
@@ -50,6 +52,70 @@
 .input-group input:focus {
     outline: none;
     border-color: #83d8eb;
+    box-shadow: 0 0 0 4px rgba(131, 216, 235, 0.18);
+}
+
+.login-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    color: #cfdaef;
+    font-size: 0.92rem;
+}
+
+.login-options label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.login-options input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 2px solid #54aec4;
+    background: rgba(15, 15, 15, 0.85);
+    display: inline-grid;
+    place-content: center;
+    cursor: pointer;
+}
+
+.login-options input[type="checkbox"]::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    transform: scale(0);
+    transition: transform 0.15s ease;
+    background: #8ce7fd;
+}
+
+.login-options input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+.login-options input[type="checkbox"]:focus-visible {
+    outline: 2px solid #8ce7fd;
+    outline-offset: 2px;
+}
+
+.text-button {
+    background: rgba(84, 174, 196, 0.16);
+    border: 1px solid rgba(84, 174, 196, 0.7);
+    border-radius: 999px;
+    color: #dff7fd;
+    padding: 7px 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.text-button:hover {
+    background: rgba(84, 174, 196, 0.3);
+    transform: translateY(-1px);
 }
 
 .form-message {
@@ -72,5 +138,26 @@
 
 .form-note {
     margin-bottom: 12px;
-    color: #dceef3;
+    color: #cfdaef;
+}
+
+.helper-links {
+    margin-top: 14px;
+    color: #cfdaef;
+}
+
+.helper-links a {
+    color: #8fe6fb;
+    font-weight: 600;
+}
+
+.helper-links a:hover {
+    color: #b4f2ff;
+}
+
+@media (max-width: 640px) {
+    .login-options {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }

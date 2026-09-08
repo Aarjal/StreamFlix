@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const page = document.body.dataset.page;
 
+  initNavigation();
   initPasswordToggle();
 
   if (page === 'home') {
@@ -21,6 +22,38 @@ document.addEventListener('DOMContentLoaded', () => {
     initFeedbackForm();
   }
 });
+
+function initNavigation() {
+  const toggle = document.querySelector('[data-nav-toggle]');
+  const menu = document.querySelector('[data-nav-menu]');
+
+  if (!toggle || !menu) {
+    return;
+  }
+
+  const closeMenu = () => {
+    menu.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+  };
+
+  toggle.addEventListener('click', () => {
+    const isOpen = menu.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  menu.addEventListener('click', (event) => {
+    if (event.target.closest('a')) {
+      closeMenu();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeMenu();
+      toggle.focus();
+    }
+  });
+}
 
 function initPasswordToggle() {
   const toggleButton = document.querySelector('[data-toggle-password]');

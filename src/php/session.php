@@ -3,6 +3,15 @@
 declare(strict_types=1);
 
 if (session_status() === PHP_SESSION_NONE) {
+    // XAMPP's shared temp folder may not be writable by the current user.
+    // Keep development sessions inside the project instead.
+    $sessionPath = __DIR__ . '/../../.sessions';
+
+    if (!is_dir($sessionPath) && !mkdir($sessionPath, 0700, true) && !is_dir($sessionPath)) {
+        throw new RuntimeException('Unable to create the local session directory.');
+    }
+
+    session_save_path($sessionPath);
     session_start();
 }
 

@@ -2,6 +2,18 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . '/config.php';
+
+// Setup seeds development data, so it must never be exposed on a live site.
+$remoteAddress = $_SERVER['REMOTE_ADDR'] ?? '';
+$isCommandLine = PHP_SAPI === 'cli';
+$isLocalRequest = in_array($remoteAddress, ['127.0.0.1', '::1'], true);
+
+if (!streamflix_is_local() || (!$isCommandLine && !$isLocalRequest)) {
+    http_response_code(403);
+    exit('Setup is available only in the local development environment.');
+}
+
 require __DIR__ . '/db.php';
 
 $pdo->exec(
@@ -40,6 +52,27 @@ $pdo->exec(
     )'
 );
 
+$columnExists = static function (PDO $pdo, string $table, string $column): bool {
+    $stmt = $pdo->prepare('SELECT COUNT(1) AS total FROM information_schema.columns WHERE table_schema = DATABASE() AND table_name = :table_name AND column_name = :column_name');
+    $stmt->execute([
+        'table_name' => $table,
+        'column_name' => $column,
+    ]);
+
+    $row = $stmt->fetch();
+
+    return ((int) ($row['total'] ?? 0)) > 0;
+};
+
+// Allow setup to upgrade databases created by earlier versions of the project.
+if (!$columnExists($pdo, 'users', 'email')) {
+    $pdo->exec('ALTER TABLE users ADD COLUMN email VARCHAR(120) NULL AFTER password_hash');
+}
+
+if (!$columnExists($pdo, 'users', 'is_active')) {
+    $pdo->exec('ALTER TABLE users ADD COLUMN is_active TINYINT(1) NOT NULL DEFAULT 1 AFTER email');
+}
+
 $indexExists = static function (PDO $pdo, string $table, string $index): bool {
     $stmt = $pdo->prepare('SELECT COUNT(1) AS total FROM information_schema.statistics WHERE table_schema = DATABASE() AND table_name = :table_name AND index_name = :index_name');
     $stmt->execute([
@@ -63,7 +96,7 @@ if (!$indexExists($pdo, 'plan_selections', 'idx_plan_selected_at')) {
 $demoUsername = 'demo';
 $demoPasswordHash = password_hash('demo123', PASSWORD_DEFAULT);
 
-$stmt = $pdo->prepare('INSERT INTO users (username, password_hash, email) VALUES (:username, :password_hash, :email) ON DUPLICATE KEY UPDATE username = username');
+$stmt = $pdo->prepare('INSERT INTO users (username, password_hash, email) VALUES (:username, :password_hash, :email) ON DUPLICATE KEY UPDATE password_hash = VALUES(password_hash), email = VALUES(email), is_active = 1');
 $stmt->execute([
     'username' => $demoUsername,
     'password_hash' => $demoPasswordHash,

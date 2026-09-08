@@ -2,10 +2,13 @@
 
 declare(strict_types=1);
 
-$host = 'sql311.infinityfree.com';
-$dbName = 'if0_41392703_data_projector';
-$dbUser = 'if0_41392703';
-$dbPass = '(Your vPanel Password)';
+require_once __DIR__ . '/config.php';
+
+// Local XAMPP defaults. Override these in .env (never commit that file).
+$host = streamflix_env('STREAMFLIX_DB_HOST', '127.0.0.1');
+$dbName = streamflix_env('STREAMFLIX_DB_NAME', 'streamflix');
+$dbUser = streamflix_env('STREAMFLIX_DB_USER', 'root');
+$dbPass = streamflix_env('STREAMFLIX_DB_PASS', '');
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host={$host};dbname={$dbName};charset={$charset}";

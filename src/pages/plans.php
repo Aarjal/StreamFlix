@@ -22,7 +22,7 @@ require __DIR__ . '/../php/head.php';
         <div class="plans-container">
             <div class="plan-card">
                 <h2>Basic</h2>
-                <p class="price" data-monthly="₹99/month" data-yearly="₹950/year">₹99/month</p>
+                <p class="price" data-monthly="&#8377;99/month" data-yearly="&#8377;950/year">&#8377;99/month</p>
                 <ul>
                     <li>Access to limited content</li>
                     <li>Standard Quality</li>
@@ -34,7 +34,7 @@ require __DIR__ . '/../php/head.php';
             <div class="plan-card highlighted">
                 <span class="badge">Most Popular</span>
                 <h2>Standard</h2>
-                <p class="price" data-monthly="₹199/month" data-yearly="₹1910/year">₹199/month</p>
+                <p class="price" data-monthly="&#8377;199/month" data-yearly="&#8377;1910/year">&#8377;199/month</p>
                 <ul>
                     <li>Access to all content</li>
                     <li>HD Quality</li>
@@ -45,7 +45,7 @@ require __DIR__ . '/../php/head.php';
 
             <div class="plan-card">
                 <h2>Premium</h2>
-                <p class="price" data-monthly="₹299/month" data-yearly="₹2870/year">₹299/month</p>
+                <p class="price" data-monthly="&#8377;299/month" data-yearly="&#8377;2870/year">&#8377;299/month</p>
                 <ul>
                     <li>All content unlocked</li>
                     <li>4K Ultra HD + HDR</li>

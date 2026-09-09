@@ -25,7 +25,7 @@ require __DIR__ . '/../php/head.php';
             </details>
             <details>
                 <summary>How do I report a problem?</summary>
-                <p>Use the Feedback page from the More menu and submit your issue details.</p>
+                <p>Use the Feedback page in the main navigation and submit your issue details.</p>
             </details>
         </div>
     </main>

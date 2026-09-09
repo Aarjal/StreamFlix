@@ -88,6 +88,17 @@ function initHomeSearch() {
 
     searchFeedback.textContent = `Searching for "${value}"...`;
   });
+
+  searchBar.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter') {
+      return;
+    }
+
+    const query = searchBar.value.trim();
+    if (query) {
+      window.location.href = `movies.php?search=${encodeURIComponent(query)}`;
+    }
+  });
 }
 
 function initMovieFiltering() {
@@ -147,6 +158,11 @@ function initMovieFiltering() {
   movieSearch.addEventListener('input', applyFilters);
   movieGenre.addEventListener('change', applyFilters);
   movieSort.addEventListener('change', applyFilters);
+
+  const queryFromHome = new URLSearchParams(window.location.search).get('search');
+  if (queryFromHome) {
+    movieSearch.value = queryFromHome;
+  }
 
   applyFilters();
 }

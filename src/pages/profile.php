@@ -10,17 +10,18 @@ if (!$username) {
 
 $pageTitle = 'StreamFlix | Profile';
 $currentPage = 'profile';
-$extraStyles = [];
+$extraStyles = ['../styles/account.css'];
 require __DIR__ . '/../php/head.php';
 ?>
-<body class="home-page">
+<body class="account-page">
     <?php require __DIR__ . '/../php/nav.php'; ?>
-
-    <main id="main-content" class="hero">
-        <h1>Your Profile</h1>
-        <p>Welcome back, <strong><?= htmlspecialchars($username) ?></strong>.</p>
-        <p class="status-text">Account type: Demo User • Watchlist: Coming soon</p>
-        <a class="button" href="movies.php">Go to Movies</a>
+    <main id="main-content" class="account-shell">
+        <header class="account-intro"><p class="eyebrow">Your account</p><h1>Welcome back, <?= htmlspecialchars($username) ?>.</h1><p>Everything you need for your next movie night, in one place.</p></header>
+        <section class="account-grid" aria-label="Account overview">
+            <article class="account-card account-card-primary"><span class="account-avatar" aria-hidden="true"><?= htmlspecialchars(strtoupper(substr($username, 0, 1))) ?></span><div><p class="account-label">Profile</p><h2><?= htmlspecialchars($username) ?></h2><p>Demo member</p></div><a class="text-link" href="../php/logout.php">Sign out <span aria-hidden="true">&#8594;</span></a></article>
+            <article class="account-card"><p class="account-label">Watchlist</p><h2>Coming soon</h2><p>Save a title and pick up right where you left off.</p><a class="button button-ghost" href="movies.php">Browse titles</a></article>
+            <article class="account-card"><p class="account-label">Membership</p><h2>Find your fit</h2><p>Explore plans for solo watching, sharing, and more.</p><a class="button button-ghost" href="plans.php">View plans</a></article>
+        </section>
     </main>
 </body>
 </html>

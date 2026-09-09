@@ -6,7 +6,7 @@ $username = current_username();
 
 $pageTitle = 'StreamFlix | Home';
 $currentPage = 'home';
-$extraStyles = ['../styles/home.css'];
+$extraStyles = ['../styles/home.css', '../styles/movie-details.css'];
 require __DIR__ . '/../php/head.php';
 ?>
 <body class="home-page" data-page="home">

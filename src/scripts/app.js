@@ -1,16 +1,95 @@
+// Movie data for the details modal
+const MOVIE_DATA = {
+    'Avengers': {
+        title: 'Avengers',
+        year: 2012,
+        duration: '2h 23m',
+        genre: 'Action',
+        rating: 8.0,
+        poster: '../../assets/images/avengers.jpg',
+        backdrop: '../../assets/images/avengers.jpg',
+        synopsis: 'Earth\'s mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.',
+        cast: ['Robert Downey Jr.', 'Chris Evans', 'Mark Ruffalo', 'Chris Hemsworth', 'Scarlett Johansson', 'Jeremy Renner'],
+        related: ['Inception', 'The Prestige', 'Interstellar']
+    },
+    'Life of Pi': {
+        title: 'Life of Pi',
+        year: 2012,
+        duration: '2h 7m',
+        genre: 'Adventure',
+        rating: 7.9,
+        poster: '../../assets/images/lifeofpie.jpg',
+        backdrop: '../../assets/images/lifeofpie.jpg',
+        synopsis: 'A young man who survives a disaster at sea is hurtled into an epic journey of adventure and discovery. While cast away, he forms an unexpected connection with another survivor: a fearsome Bengal tiger.',
+        cast: ['Suraj Sharma', 'Irrfan Khan', 'Adil Hussain', 'Tabu', 'Rafe Spall', 'Gérard Depardieu'],
+        related: ['Shutter Island', 'The Prestige', 'Interstellar']
+    },
+    'Inception': {
+        title: 'Inception',
+        year: 2010,
+        duration: '2h 28m',
+        genre: 'Sci-Fi',
+        rating: 8.8,
+        poster: '../../assets/images/inception.jpg',
+        backdrop: '../../assets/images/inception.jpg',
+        synopsis: 'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.',
+        cast: ['Leonardo DiCaprio', 'Marion Cotillard', 'Tom Hardy', 'Elliot Page', 'Ken Watanabe', 'Joseph Gordon-Levitt'],
+        related: ['The Prestige', 'Interstellar', 'Shutter Island']
+    },
+    'The Prestige': {
+        title: 'The Prestige',
+        year: 2006,
+        duration: '2h 10m',
+        genre: 'Thriller',
+        rating: 8.5,
+        poster: '../../assets/images/inception.jpg',
+        backdrop: '../../assets/images/inception.jpg',
+        synopsis: 'After a tragic accident, two stage magicians engage in a battle to create the ultimate illusion while sacrificing everything they have to outwit each other.',
+        cast: ['Christian Bale', 'Hugh Jackman', 'Scarlett Johansson', 'Michael Caine', 'Rebecca Hall', 'David Bowie'],
+        related: ['Inception', 'Interstellar', 'Shutter Island']
+    },
+    'Interstellar': {
+        title: 'Interstellar',
+        year: 2014,
+        duration: '2h 49m',
+        genre: 'Sci-Fi',
+        rating: 8.7,
+        poster: '../../assets/images/inception.jpg',
+        backdrop: '../../assets/images/inception.jpg',
+        synopsis: 'A team of explorers travel through a wormhole in space in an attempt to ensure humanity\'s survival as Earth\'s time comes to an end.',
+        cast: ['Matthew McConaughey', 'Anne Hathaway', 'Jessica Chastain', 'Bill Irwin', 'Ellen Burstyn', 'Michael Caine'],
+        related: ['Inception', 'The Prestige', 'Life of Pi']
+    },
+    'Shutter Island': {
+        title: 'Shutter Island',
+        year: 2010,
+        duration: '2h 18m',
+        genre: 'Drama',
+        rating: 8.2,
+        poster: '../../assets/images/lifeofpie.jpg',
+        backdrop: '../../assets/images/lifeofpie.jpg',
+        synopsis: 'In 1954, a U.S. Marshal investigates the disappearance of a murderer who escaped from a hospital for the criminally insane on Shutter Island.',
+        cast: ['Leonardo DiCaprio', 'Mark Ruffalo', 'Ben Kingsley', 'Max von Sydow', 'Michelle Williams', 'Emily Mortimer'],
+        related: ['Inception', 'The Prestige', 'Interstellar']
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   const page = document.body.dataset.page;
 
   initNavigation();
   initPasswordToggle();
+  initMovieModal();
 
   if (page === 'home') {
     initHomeSearch();
+    initPosterCards();
   }
 
   if (page === 'movies') {
     initMovieFiltering();
     initWatchButtons();
+    initMovieCards();
   }
 
   if (page === 'plans') {
@@ -252,4 +331,244 @@ function initFeedbackForm() {
   });
 
   updateCounter();
+}
+
+// Movie Modal Functions
+function initMovieModal() {
+  // Create modal HTML and inject into body
+  const modalHTML = createMovieModalHTML();
+  document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+  const modal = document.getElementById('movie-modal');
+  const closeBtn = modal?.querySelector('.movie-modal__close');
+
+  if (!modal || !closeBtn) {
+    return;
+  }
+
+  // Close on backdrop click
+  modal.querySelector('.movie-modal__backdrop').addEventListener('click', () => closeMovieModal());
+
+  // Close on close button
+  closeBtn.addEventListener('click', () => closeMovieModal());
+
+  // Close on Escape key
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+      closeMovieModal();
+    }
+  });
+
+  // Trap focus in modal when open
+  modal.addEventListener('keydown', (event) => {
+    if (event.key === 'Tab' && modal.classList.contains('is-open')) {
+      trapFocus(event, modal);
+    }
+  });
+
+  // Make openMovieModal globally accessible
+  window.openMovieModal = openMovieModal;
+}
+
+function createMovieModalHTML() {
+  return `
+    <div class="movie-modal" id="movie-modal" role="dialog" aria-modal="true" aria-labelledby="movie-modal-title">
+      <div class="movie-modal__backdrop" tabindex="-1"></div>
+      <div class="movie-modal__content">
+        <button class="movie-modal__close" aria-label="Close movie details">&times;</button>
+        <div class="movie-modal__header">
+          <img class="movie-modal__backdrop-image" id="movie-modal-backdrop" src="" alt="">
+          <div class="movie-modal__header-overlay"></div>
+          <div class="movie-modal__header-content">
+            <img class="movie-modal__poster" id="movie-modal-poster" src="" alt="">
+            <div class="movie-modal__meta">
+              <div class="movie-modal__badges" id="movie-modal-badges"></div>
+              <h1 class="movie-modal__title" id="movie-modal-title"></h1>
+              <div class="movie-modal__details" id="movie-modal-details"></div>
+            </div>
+          </div>
+        </div>
+        <div class="movie-modal__body">
+          <section class="movie-modal__section">
+            <h2 class="movie-modal__section-title">Synopsis</h2>
+            <p class="movie-modal__synopsis" id="movie-modal-synopsis"></p>
+          </section>
+          <section class="movie-modal__section">
+            <h2 class="movie-modal__section-title">Cast</h2>
+            <ul class="movie-modal__cast-list" id="movie-modal-cast"></ul>
+          </section>
+          <section class="movie-modal__section">
+            <h2 class="movie-modal__section-title">More Like This</h2>
+            <div class="movie-modal__related" id="movie-modal-related"></div>
+          </section>
+        </div>
+        <div class="movie-modal__actions">
+          <button class="movie-modal__action" id="movie-modal-play" aria-disabled="true">
+            &#9656;&nbsp; Play Trailer (Demo)
+          </button>
+          <button class="movie-modal__action movie-modal__action--ghost" id="movie-modal-save">
+            &#9825;&nbsp; Save to List
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function openMovieModal(title) {
+  const movie = MOVIE_DATA[title];
+  if (!movie) {
+    console.warn('Movie not found:', title);
+    return;
+  }
+
+  const modal = document.getElementById('movie-modal');
+  if (!modal) return;
+
+  // Populate modal content
+  document.getElementById('movie-modal-poster').src = movie.poster;
+  document.getElementById('movie-modal-poster').alt = `${movie.title} poster`;
+  document.getElementById('movie-modal-backdrop').src = movie.backdrop;
+  document.getElementById('movie-modal-backdrop').alt = '';
+  document.getElementById('movie-modal-title').textContent = movie.title;
+  document.getElementById('movie-modal-synopsis').textContent = movie.synopsis;
+
+  // Badges
+  const badgesContainer = document.getElementById('movie-modal-badges');
+  badgesContainer.innerHTML = `
+    <span class="movie-modal__badge">${movie.year}</span>
+    <span class="movie-modal__badge">${movie.duration}</span>
+    <span class="movie-modal__badge">${movie.genre}</span>
+    <span class="movie-modal__badge movie-modal__badge--rating">&#9733; ${movie.rating}</span>
+  `;
+
+  // Details
+  document.getElementById('movie-modal-details').innerHTML = `
+    <span class="movie-modal__detail">${movie.year}</span>
+    <span class="movie-modal__detail">${movie.duration}</span>
+    <span class="movie-modal__detail">${movie.genre}</span>
+  `;
+
+  // Cast
+  const castList = document.getElementById('movie-modal-cast');
+  castList.innerHTML = movie.cast.map(actor => `<li class="movie-modal__cast-item">${actor}</li>`).join('');
+
+  // Related movies
+  const relatedContainer = document.getElementById('movie-modal-related');
+  relatedContainer.innerHTML = movie.related.map(relatedTitle => {
+    const relatedMovie = MOVIE_DATA[relatedTitle];
+    if (!relatedMovie) return '';
+    return `
+      <article class="movie-modal__related-item" data-movie-title="${relatedTitle}" tabindex="0" role="button" aria-label="View ${relatedTitle} details">
+        <img class="movie-modal__related-poster" src="${relatedMovie.poster}" alt="${relatedTitle} poster" loading="lazy">
+        <div class="movie-modal__related-info">
+          <h3 class="movie-modal__related-title">${relatedTitle}</h3>
+          <p class="movie-modal__related-meta">${relatedMovie.year} &middot; &#9733; ${relatedMovie.rating}</p>
+        </div>
+      </article>
+    `;
+  }).join('');
+
+  // Add click handlers for related movies
+  relatedContainer.querySelectorAll('.movie-modal__related-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const relatedTitle = item.dataset.movieTitle;
+      openMovieModal(relatedTitle);
+    });
+    item.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        const relatedTitle = item.dataset.movieTitle;
+        openMovieModal(relatedTitle);
+      }
+    });
+  });
+
+  // Show modal
+  modal.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+
+  // Focus the close button for accessibility
+  setTimeout(() => {
+    modal.querySelector('.movie-modal__close').focus();
+  }, 50);
+}
+
+function closeMovieModal() {
+  const modal = document.getElementById('movie-modal');
+  if (!modal) return;
+
+  modal.classList.remove('is-open');
+  document.body.style.overflow = '';
+}
+
+function trapFocus(event, modal) {
+  const focusableElements = modal.querySelectorAll(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  );
+  const firstElement = focusableElements[0];
+  const lastElement = focusableElements[focusableElements.length - 1];
+
+  if (event.shiftKey && document.activeElement === firstElement) {
+    event.preventDefault();
+    lastElement.focus();
+  } else if (!event.shiftKey && document.activeElement === lastElement) {
+    event.preventDefault();
+    firstElement.focus();
+  }
+}
+
+// Initialize poster cards on home page
+function initPosterCards() {
+  const posterCards = document.querySelectorAll('.poster-card');
+  if (posterCards.length === 0) return;
+
+  posterCards.forEach(card => {
+    const title = card.querySelector('h3')?.textContent?.trim();
+    if (!title) return;
+
+    // Add overlay with Details button
+    const overlayHTML = `
+      <div class="poster-card__overlay">
+        <button class="poster-card__overlay-btn" data-movie-title="${title}" type="button">Details</button>
+      </div>
+    `;
+    card.insertAdjacentHTML('beforeend', overlayHTML);
+
+    // Add click handler
+    const overlayBtn = card.querySelector('.poster-card__overlay-btn');
+    overlayBtn?.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      openMovieModal(title);
+    });
+  });
+}
+
+// Initialize movie cards on movies page
+function initMovieCards() {
+  const movieCards = document.querySelectorAll('.movie-card');
+  if (movieCards.length === 0) return;
+
+  movieCards.forEach(card => {
+    const title = card.dataset.title;
+    if (!title) return;
+
+    // Add overlay with Details button
+    const overlayHTML = `
+      <div class="movie-card__overlay">
+        <button class="movie-card__overlay-btn" data-movie-title="${title}" type="button">Details</button>
+        <button class="movie-card__overlay-btn movie-card__overlay-btn--ghost" type="button">&#9825; Save</button>
+      </div>
+    `;
+    card.insertAdjacentHTML('beforeend', overlayHTML);
+
+    // Add click handler for Details button
+    const detailsBtn = card.querySelector('.movie-card__overlay-btn:not(.movie-card__overlay-btn--ghost)');
+    detailsBtn?.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      openMovieModal(title);
+    });
+  });
 }

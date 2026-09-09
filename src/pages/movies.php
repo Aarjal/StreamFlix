@@ -4,7 +4,7 @@ $username = current_username();
 
 $pageTitle = 'StreamFlix | Browse';
 $currentPage = 'movies';
-$extraStyles = ['../styles/movies.css'];
+$extraStyles = ['../styles/movies.css', '../styles/movie-details.css'];
 require __DIR__ . '/../php/head.php';
 ?>
 <body class="movies-page" data-page="movies">

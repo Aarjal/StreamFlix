@@ -185,12 +185,26 @@ function initMovieFiltering() {
   const movieGenre = document.getElementById('movie-genre');
   const movieSort = document.getElementById('movie-sort');
   const moviesGrid = document.getElementById('movies-grid');
+  const moviesEmpty = document.getElementById('movies-empty');
+  const moviesEmptyMessage = document.getElementById('movies-empty-message');
+  const clearFiltersButton = document.getElementById('movies-clear-filters');
+  const activeFiltersBar = document.getElementById('movie-active-filters');
+  const filterChipsContainer = document.getElementById('movie-filter-chips');
+  const clearAllChipsButton = document.getElementById('movie-filter-chips-clear');
   const movieCards = Array.from(document.querySelectorAll('.movie-card'));
   const movieCount = document.getElementById('movie-count');
 
   if (!movieSearch || !movieGenre || !movieSort || !moviesGrid || movieCards.length === 0 || !movieCount) {
     return;
   }
+
+  const genreLabels = {
+    action: 'Action',
+    adventure: 'Adventure',
+    drama: 'Drama',
+    thriller: 'Thriller',
+    'sci-fi': 'Sci-Fi',
+  };
 
   const sortCards = (cards, sortValue) => {
     const sorted = [...cards];
@@ -213,14 +227,98 @@ function initMovieFiltering() {
     sorted.forEach((card) => moviesGrid.appendChild(card));
   };
 
-  const renderCount = () => {
-    const visibleCount = movieCards.filter((card) => card.style.display !== 'none').length;
-    movieCount.textContent = `${visibleCount} movie(s) shown`;
+  const getVisibleCount = () => movieCards.filter((card) => card.style.display !== 'none').length;
+
+  const buildEmptyMessage = (query, selectedGenre) => {
+    const genreLabel = genreLabels[selectedGenre];
+
+    if (query && selectedGenre !== 'all') {
+      return `No titles match "${query}" in ${genreLabel}. Try another search or genre.`;
+    }
+
+    if (query) {
+      return `No titles match "${query}". Try a different spelling or browse all genres.`;
+    }
+
+    if (selectedGenre !== 'all') {
+      return `No ${genreLabel} titles in the collection yet. Try another genre.`;
+    }
+
+    return 'Try adjusting your search or filters.';
+  };
+
+  const renderEmptyState = (visibleCount, query, selectedGenre) => {
+    if (!moviesEmpty) {
+      return;
+    }
+
+    const isEmpty = visibleCount === 0;
+    moviesEmpty.hidden = !isEmpty;
+    moviesGrid.hidden = isEmpty;
+
+    if (isEmpty && moviesEmptyMessage) {
+      moviesEmptyMessage.textContent = buildEmptyMessage(query, selectedGenre);
+    }
+  };
+
+  const renderCount = (visibleCount) => {
+    movieCount.textContent = visibleCount === 1 ? '1 movie shown' : `${visibleCount} movies shown`;
+  };
+
+  const createFilterChip = (filterKey, label) => {
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'movie-filter-chip';
+    chip.dataset.filter = filterKey;
+    chip.setAttribute('aria-label', `Remove ${label} filter`);
+    chip.innerHTML = `<span class="movie-filter-chip__label">${label}</span><span class="movie-filter-chip__remove" aria-hidden="true">&times;</span>`;
+    return chip;
+  };
+
+  const renderFilterChips = (query, selectedGenre) => {
+    if (!filterChipsContainer || !activeFiltersBar) {
+      return;
+    }
+
+    filterChipsContainer.replaceChildren();
+
+    const chips = [];
+
+    if (query) {
+      chips.push(createFilterChip('search', `Search: ${query}`));
+    }
+
+    if (selectedGenre !== 'all') {
+      chips.push(createFilterChip('genre', genreLabels[selectedGenre] || selectedGenre));
+    }
+
+    chips.forEach((chip) => filterChipsContainer.appendChild(chip));
+
+    const hasActiveFilters = chips.length > 0;
+    activeFiltersBar.hidden = !hasActiveFilters;
+    if (clearAllChipsButton) {
+      clearAllChipsButton.hidden = !hasActiveFilters;
+    }
+  };
+
+  const removeFilter = (filterKey) => {
+    if (filterKey === 'search') {
+      movieSearch.value = '';
+      movieSearch.focus();
+    }
+
+    if (filterKey === 'genre') {
+      movieGenre.value = 'all';
+      movieGenre.focus();
+    }
+
+    applyFilters();
   };
 
   const applyFilters = () => {
     const query = movieSearch.value.trim().toLowerCase();
     const selectedGenre = movieGenre.value;
+    const displayQuery = movieSearch.value.trim();
 
     movieCards.forEach((card) => {
       const title = (card.dataset.title || '').toLowerCase();
@@ -231,12 +329,33 @@ function initMovieFiltering() {
     });
 
     sortCards(movieCards, movieSort.value);
-    renderCount();
+
+    const visibleCount = getVisibleCount();
+    renderCount(visibleCount);
+    renderFilterChips(displayQuery, selectedGenre);
+    renderEmptyState(visibleCount, displayQuery, selectedGenre);
+  };
+
+  const clearFilters = () => {
+    movieSearch.value = '';
+    movieGenre.value = 'all';
+    applyFilters();
+    movieSearch.focus();
   };
 
   movieSearch.addEventListener('input', applyFilters);
   movieGenre.addEventListener('change', applyFilters);
   movieSort.addEventListener('change', applyFilters);
+  clearFiltersButton?.addEventListener('click', clearFilters);
+  clearAllChipsButton?.addEventListener('click', clearFilters);
+  filterChipsContainer?.addEventListener('click', (event) => {
+    const chip = event.target.closest('.movie-filter-chip');
+    if (!chip) {
+      return;
+    }
+
+    removeFilter(chip.dataset.filter || '');
+  });
 
   const queryFromHome = new URLSearchParams(window.location.search).get('search');
   if (queryFromHome) {

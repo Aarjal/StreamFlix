@@ -9,6 +9,10 @@
 .movie-filter-row { display: flex; gap: 8px; }
 #movie-genre, #movie-sort { cursor: pointer; }
 .movie-tools .status-text { grid-column: 1 / -1; margin: 0; background: transparent; border: 0; padding: 0 2px; }
+#movie-action.success {
+    border-color: rgba(98, 217, 149, 0.65);
+    color: #b9f5d1;
+}
 .movie-active-filters {
     display: flex;
     flex-wrap: wrap;

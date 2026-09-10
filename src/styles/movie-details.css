@@ -315,6 +315,16 @@
     background: rgba(255, 255, 255, 0.02);
 }
 
+.movie-modal__status {
+    flex-basis: 100%;
+    margin: 0;
+}
+
+.movie-modal__status.success {
+    border-color: rgba(98, 217, 149, 0.65);
+    color: #b9f5d1;
+}
+
 .movie-modal__action {
     display: inline-flex;
     align-items: center;
@@ -488,6 +498,20 @@
 .poster-card__overlay-btn--ghost:hover {
     border-color: #fff;
     background: rgba(255, 255, 255, 0.25);
+}
+
+.movie-card__overlay-btn.is-saved,
+.movie-modal__action.is-saved {
+    border-color: rgba(98, 217, 149, 0.55);
+    background: rgba(98, 217, 149, 0.15);
+    color: #b9f5d1;
+}
+
+.movie-card__overlay-btn.is-saved:hover,
+.movie-modal__action.is-saved:hover {
+    border-color: rgba(98, 217, 149, 0.75);
+    background: rgba(98, 217, 149, 0.22);
+    color: #d7ffe8;
 }
 
 @media (max-width: 780px) {

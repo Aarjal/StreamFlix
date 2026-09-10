@@ -74,6 +74,65 @@ const MOVIE_DATA = {
     }
 };
 
+const savedTitles = new Set();
+
+function isTitleSaved(title) {
+  return savedTitles.has(title);
+}
+
+function toggleSavedTitle(title) {
+  if (savedTitles.has(title)) {
+    savedTitles.delete(title);
+    return false;
+  }
+
+  savedTitles.add(title);
+  return true;
+}
+
+function updateSaveButtonState(button, title) {
+  const saved = isTitleSaved(title);
+
+  button.classList.toggle('is-saved', saved);
+  button.setAttribute('aria-pressed', String(saved));
+
+  if (button.id === 'movie-modal-save') {
+    button.innerHTML = saved ? '&#9829;&nbsp; Saved to List' : '&#9825;&nbsp; Save to List';
+    return;
+  }
+
+  button.innerHTML = saved ? '&#9829; Saved' : '&#9825; Save';
+}
+
+function syncSaveButtons(title) {
+  document.querySelectorAll('[data-save-movie]').forEach((button) => {
+    if (button.dataset.saveMovie === title) {
+      updateSaveButtonState(button, title);
+    }
+  });
+}
+
+function showActionStatus(element, message, isSuccess = true) {
+  if (!element) {
+    return;
+  }
+
+  element.textContent = message;
+  element.classList.toggle('success', isSuccess);
+}
+
+function handleSaveTitle(title, { statusEl } = {}) {
+  const nowSaved = toggleSavedTitle(title);
+  syncSaveButtons(title);
+
+  const message = nowSaved
+    ? `Saved "${title}" to your list (demo only — not stored yet).`
+    : `Removed "${title}" from your list.`;
+
+  const browseStatus = document.getElementById('movie-action');
+  showActionStatus(statusEl || browseStatus, message, nowSaved);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const page = document.body.dataset.page;
 
@@ -485,6 +544,16 @@ function initMovieModal() {
     }
   });
 
+  const saveBtn = document.getElementById('movie-modal-save');
+  const modalStatus = document.getElementById('movie-modal-status');
+
+  saveBtn?.addEventListener('click', () => {
+    const title = modal.dataset.currentTitle;
+    if (title) {
+      handleSaveTitle(title, { statusEl: modalStatus });
+    }
+  });
+
   // Make openMovieModal globally accessible
   window.openMovieModal = openMovieModal;
 }
@@ -522,10 +591,11 @@ function createMovieModalHTML() {
           </section>
         </div>
         <div class="movie-modal__actions">
+          <p id="movie-modal-status" class="movie-modal__status status-text" aria-live="polite"></p>
           <button class="movie-modal__action" id="movie-modal-play" aria-disabled="true">
             &#9656;&nbsp; Play Trailer (Demo)
           </button>
-          <button class="movie-modal__action movie-modal__action--ghost" id="movie-modal-save">
+          <button class="movie-modal__action movie-modal__action--ghost" id="movie-modal-save" type="button" aria-pressed="false">
             &#9825;&nbsp; Save to List
           </button>
         </div>
@@ -603,6 +673,21 @@ function openMovieModal(title) {
     });
   });
 
+  const saveBtn = document.getElementById('movie-modal-save');
+  const modalStatus = document.getElementById('movie-modal-status');
+
+  modal.dataset.currentTitle = title;
+
+  if (saveBtn) {
+    saveBtn.dataset.saveMovie = title;
+    updateSaveButtonState(saveBtn, title);
+  }
+
+  if (modalStatus) {
+    modalStatus.textContent = '';
+    modalStatus.classList.remove('success');
+  }
+
   // Show modal
   modal.classList.add('is-open');
   document.body.style.overflow = 'hidden';
@@ -677,17 +762,28 @@ function initMovieCards() {
     const overlayHTML = `
       <div class="movie-card__overlay">
         <button class="movie-card__overlay-btn" data-movie-title="${title}" type="button">Details</button>
-        <button class="movie-card__overlay-btn movie-card__overlay-btn--ghost" type="button">&#9825; Save</button>
+        <button class="movie-card__overlay-btn movie-card__overlay-btn--ghost" data-save-movie="${title}" type="button" aria-pressed="false">&#9825; Save</button>
       </div>
     `;
     card.insertAdjacentHTML('beforeend', overlayHTML);
 
-    // Add click handler for Details button
-    const detailsBtn = card.querySelector('.movie-card__overlay-btn:not(.movie-card__overlay-btn--ghost)');
+    const detailsBtn = card.querySelector('.movie-card__overlay-btn:not([data-save-movie])');
+    const saveBtn = card.querySelector('[data-save-movie]');
+
     detailsBtn?.addEventListener('click', (event) => {
       event.preventDefault();
       event.stopPropagation();
       openMovieModal(title);
     });
+
+    saveBtn?.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      handleSaveTitle(title);
+    });
+
+    if (saveBtn) {
+      updateSaveButtonState(saveBtn, title);
+    }
   });
 }

@@ -5,6 +5,7 @@ $username = current_username();
 $pageTitle = 'StreamFlix | FAQs';
 $currentPage = 'faq';
 $extraStyles = ['../styles/plans.css'];
+$pageDescription = 'StreamFlix FAQs - Quick answers about plans, login, streaming features, and more.';
 require __DIR__ . '/../php/head.php';
 ?>
 <body class="plans-page" data-page="faq">

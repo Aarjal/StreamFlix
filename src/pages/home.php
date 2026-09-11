@@ -67,6 +67,156 @@ require __DIR__ . '/../php/head.php';
             </div>
         </section>
 
+        <?php if ($username): ?>
+        <section class="home-section discovery-row" aria-labelledby="continue-watching-heading">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Pick up where you left off</p>
+                    <h2 id="continue-watching-heading">Continue Watching</h2>
+                </div>
+            </div>
+            <div class="discovery-rail" role="list">
+                <article class="discovery-card" role="listitem">
+                    <img src="../../assets/images/inception.jpg" alt="Inception" loading="lazy">
+                    <div class="discovery-card-content">
+                        <span class="discovery-progress" aria-label="45% watched">45%</span>
+                        <h3>Inception</h3>
+                        <p class="discovery-meta">2h 28m &middot; 1h 12m left</p>
+                    </div>
+                </article>
+                <article class="discovery-card" role="listitem">
+                    <img src="../../assets/images/avengers.jpg" alt="Avengers" loading="lazy">
+                    <div class="discovery-card-content">
+                        <span class="discovery-progress" aria-label="78% watched">78%</span>
+                        <h3>Avengers</h3>
+                        <p class="discovery-meta">2h 23m &middot; 32m left</p>
+                    </div>
+                </article>
+                <article class="discovery-card" role="listitem">
+                    <img src="../../assets/images/lifeofpie.jpg" alt="Life of Pi" loading="lazy">
+                    <div class="discovery-card-content">
+                        <span class="discovery-progress" aria-label="22% watched">22%</span>
+                        <h3>Life of Pi</h3>
+                        <p class="discovery-meta">2h 7m &middot; 1h 38m left</p>
+                    </div>
+                </article>
+                <article class="discovery-card" role="listitem">
+                    <img src="../../assets/images/interstellar.jpg" alt="Interstellar" loading="lazy">
+                    <div class="discovery-card-content">
+                        <span class="discovery-progress" aria-label="60% watched">60%</span>
+                        <h3>Interstellar</h3>
+                        <p class="discovery-meta">2h 49m &middot; 1h 7m left</p>
+                    </div>
+                </article>
+                <article class="discovery-card" role="listitem">
+                    <img src="../../assets/images/the-prestige.jpg" alt="The Prestige" loading="lazy">
+                    <div class="discovery-card-content">
+                        <span class="discovery-progress" aria-label="90% watched">90%</span>
+                        <h3>The Prestige</h3>
+                        <p class="discovery-meta">2h 10m &middot; 13m left</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <?php endif; ?>
+
+        <section class="home-section discovery-row" aria-labelledby="weekend-picks-heading">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Curated for you</p>
+                    <h2 id="weekend-picks-heading">Weekend Picks</h2>
+                </div>
+            </div>
+            <div class="discovery-rail" role="list">
+                <article class="discovery-card" role="listitem">
+                    <img src="../../assets/images/interstellar.jpg" alt="Interstellar" loading="lazy">
+                    <div class="discovery-card-content">
+                        <span class="discovery-badge">Sci-Fi Epic</span>
+                        <h3>Interstellar</h3>
+                        <p class="discovery-meta">2014 &middot; &#9733; 8.7</p>
+                    </div>
+                </article>
+                <article class="discovery-card" role="listitem">
+                    <img src="../../assets/images/the-prestige.jpg" alt="The Prestige" loading="lazy">
+                    <div class="discovery-card-content">
+                        <span class="discovery-badge">Mind-Bending</span>
+                        <h3>The Prestige</h3>
+                        <p class="discovery-meta">2006 &middot; &#9733; 8.5</p>
+                    </div>
+                </article>
+                <article class="discovery-card" role="listitem">
+                    <img src="../../assets/images/shutter-island.jpg" alt="Shutter Island" loading="lazy">
+                    <div class="discovery-card-content">
+                        <span class="discovery-badge">Mystery Thriller</span>
+                        <h3>Shutter Island</h3>
+                        <p class="discovery-meta">2010 &middot; &#9733; 8.2</p>
+                    </div>
+                </article>
+                <article class="discovery-card" role="listitem">
+                    <img src="../../assets/images/inception.jpg" alt="Inception" loading="lazy">
+                    <div class="discovery-card-content">
+                        <span class="discovery-badge">Dream Heist</span>
+                        <h3>Inception</h3>
+                        <p class="discovery-meta">2010 &middot; &#9733; 8.8</p>
+                    </div>
+                </article>
+                <article class="discovery-card" role="listitem">
+                    <img src="../../assets/images/lifeofpie.jpg" alt="Life of Pi" loading="lazy">
+                    <div class="discovery-card-content">
+                        <span class="discovery-badge">Visual Masterpiece</span>
+                        <h3>Life of Pi</h3>
+                        <p class="discovery-meta">2012 &middot; &#9733; 7.9</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="home-section discovery-row" aria-labelledby="because-watched-heading">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Because you watched Inception</p>
+                    <h2 id="because-watched-heading">More Like This</h2>
+                </div>
+            </div>
+            <div class="discovery-rail" role="list">
+                <article class="discovery-card" role="listitem">
+                    <img src="../../assets/images/the-prestige.jpg" alt="The Prestige" loading="lazy">
+                    <div class="discovery-card-content">
+                        <h3>The Prestige</h3>
+                        <p class="discovery-meta">2006 &middot; Thriller &middot; &#9733; 8.5</p>
+                    </div>
+                </article>
+                <article class="discovery-card" role="listitem">
+                    <img src="../../assets/images/shutter-island.jpg" alt="Shutter Island" loading="lazy">
+                    <div class="discovery-card-content">
+                        <h3>Shutter Island</h3>
+                        <p class="discovery-meta">2010 &middot; Drama/Mystery &middot; &#9733; 8.2</p>
+                    </div>
+                </article>
+                <article class="discovery-card" role="listitem">
+                    <img src="../../assets/images/interstellar.jpg" alt="Interstellar" loading="lazy">
+                    <div class="discovery-card-content">
+                        <h3>Interstellar</h3>
+                        <p class="discovery-meta">2014 &middot; Sci-Fi &middot; &#9733; 8.7</p>
+                    </div>
+                </article>
+                <article class="discovery-card" role="listitem">
+                    <img src="../../assets/images/avengers.jpg" alt="Avengers" loading="lazy">
+                    <div class="discovery-card-content">
+                        <h3>Avengers</h3>
+                        <p class="discovery-meta">2012 &middot; Action &middot; &#9733; 8.0</p>
+                    </div>
+                </article>
+                <article class="discovery-card" role="listitem">
+                    <img src="../../assets/images/lifeofpie.jpg" alt="Life of Pi" loading="lazy">
+                    <div class="discovery-card-content">
+                        <h3>Life of Pi</h3>
+                        <p class="discovery-meta">2012 &middot; Adventure &middot; &#9733; 7.9</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
         <section class="home-section benefits-section" aria-labelledby="benefits-heading">
             <div class="section-heading compact-heading">
                 <div>

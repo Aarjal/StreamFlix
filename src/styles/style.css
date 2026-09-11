@@ -132,6 +132,31 @@ a { color: inherit; }
 .nav-links .nav-account:hover,
 .nav-links .nav-account.active { border-color: var(--accent); background: var(--accent); }
 
+.nav-avatar {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(229, 9, 20, 0.3);
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.nav-avatar:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 18px rgba(229, 9, 20, 0.45);
+}
+
+.nav-avatar:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+}
+
 .nav-toggle { display: none; }
 
 .hero {

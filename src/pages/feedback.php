@@ -5,6 +5,7 @@ $username = current_username();
 $pageTitle = 'StreamFlix | Feedback';
 $currentPage = 'feedback';
 $extraStyles = ['../styles/login.css'];
+$pageDescription = 'Help shape StreamFlix - share your feedback, suggestions, and ideas for improving the platform.';
 require __DIR__ . '/../php/head.php';
 ?>
 <body class="login-page" data-page="feedback">

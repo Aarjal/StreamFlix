@@ -11,6 +11,7 @@ if (!$username) {
 $pageTitle = 'StreamFlix | Profile';
 $currentPage = 'profile';
 $extraStyles = ['../styles/account.css'];
+$pageDescription = 'Your StreamFlix account - manage your profile, watchlist, and membership settings.';
 require __DIR__ . '/../php/head.php';
 ?>
 <body class="account-page">

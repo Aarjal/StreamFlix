@@ -8,6 +8,7 @@ $savedUsername = trim($_COOKIE['remembered_username'] ?? '');
 $pageTitle = 'StreamFlix | Login';
 $currentPage = 'login';
 $extraStyles = ['../styles/login.css'];
+$pageDescription = 'Sign in to your StreamFlix account to access your profile, watchlist, and personalized recommendations.';
 require __DIR__ . '/../php/head.php';
 ?>
 <body class="login-page">

@@ -21,6 +21,11 @@
             <li><a class="<?= $currentPage === 'faq' ? 'active' : '' ?>" href="faq.php">FAQs</a></li>
             <?php if ($username): ?>
                 <li><a class="<?= $currentPage === 'profile' ? 'active' : '' ?>" href="profile.php">Profile</a></li>
+                <li>
+                    <a class="nav-avatar" href="profile.php" aria-label="Account menu for <?= htmlspecialchars($username) ?>">
+                        <span class="nav-avatar__initial" aria-hidden="true"><?= htmlspecialchars(strtoupper(substr($username, 0, 1))) ?></span>
+                    </a>
+                </li>
                 <li><a class="nav-account" href="../php/logout.php">Sign out</a></li>
             <?php else: ?>
                 <li><a class="nav-account <?= $currentPage === 'login' ? 'active' : '' ?>" href="login.php">Sign in</a></li>

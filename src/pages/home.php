@@ -7,6 +7,7 @@ $username = current_username();
 $pageTitle = 'StreamFlix | Home';
 $currentPage = 'home';
 $extraStyles = ['../styles/home.css', '../styles/movie-details.css'];
+$pageDescription = 'StreamFlix - Discover award-winning films, fan favorites, and something new for every mood. Stream movies on your terms.';
 require __DIR__ . '/../php/head.php';
 ?>
 <body class="home-page" data-page="home">
@@ -87,5 +88,4 @@ require __DIR__ . '/../php/head.php';
     </main>
 
     <script src="../scripts/app.js"></script>
-</body>
-</html>
+<?php require __DIR__ . '/../php/footer.php'; ?>

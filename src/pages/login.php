@@ -45,5 +45,4 @@ require __DIR__ . '/../php/head.php';
     </main>
 
     <script src="../scripts/app.js"></script>
-</body>
-</html>
+<?php require __DIR__ . '/../php/footer.php'; ?>

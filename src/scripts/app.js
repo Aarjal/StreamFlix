@@ -42,8 +42,8 @@ const MOVIE_DATA = {
         duration: '2h 10m',
         genre: 'Thriller',
         rating: 8.5,
-        poster: '../../assets/images/inception.jpg',
-        backdrop: '../../assets/images/inception.jpg',
+        poster: '../../assets/images/the-prestige.jpg',
+        backdrop: '../../assets/images/the-prestige.jpg',
         synopsis: 'After a tragic accident, two stage magicians engage in a battle to create the ultimate illusion while sacrificing everything they have to outwit each other.',
         cast: ['Christian Bale', 'Hugh Jackman', 'Scarlett Johansson', 'Michael Caine', 'Rebecca Hall', 'David Bowie'],
         related: ['Inception', 'Interstellar', 'Shutter Island']
@@ -54,8 +54,8 @@ const MOVIE_DATA = {
         duration: '2h 49m',
         genre: 'Sci-Fi',
         rating: 8.7,
-        poster: '../../assets/images/inception.jpg',
-        backdrop: '../../assets/images/inception.jpg',
+        poster: '../../assets/images/interstellar.jpg',
+        backdrop: '../../assets/images/interstellar.jpg',
         synopsis: 'A team of explorers travel through a wormhole in space in an attempt to ensure humanity\'s survival as Earth\'s time comes to an end.',
         cast: ['Matthew McConaughey', 'Anne Hathaway', 'Jessica Chastain', 'Bill Irwin', 'Ellen Burstyn', 'Michael Caine'],
         related: ['Inception', 'The Prestige', 'Life of Pi']
@@ -66,8 +66,8 @@ const MOVIE_DATA = {
         duration: '2h 18m',
         genre: 'Drama',
         rating: 8.2,
-        poster: '../../assets/images/lifeofpie.jpg',
-        backdrop: '../../assets/images/lifeofpie.jpg',
+        poster: '../../assets/images/shutter-island.jpg',
+        backdrop: '../../assets/images/shutter-island.jpg',
         synopsis: 'In 1954, a U.S. Marshal investigates the disappearance of a murderer who escaped from a hospital for the criminally insane on Shutter Island.',
         cast: ['Leonardo DiCaprio', 'Mark Ruffalo', 'Ben Kingsley', 'Max von Sydow', 'Michelle Williams', 'Emily Mortimer'],
         related: ['Inception', 'The Prestige', 'Interstellar']

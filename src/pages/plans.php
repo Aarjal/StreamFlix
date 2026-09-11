@@ -5,6 +5,7 @@ $username = current_username();
 $pageTitle = 'StreamFlix | Plans';
 $currentPage = 'plans';
 $extraStyles = ['../styles/plans.css'];
+$pageDescription = 'Choose your StreamFlix plan - flexible billing with simple pricing for every type of viewer. Monthly or yearly options available.';
 require __DIR__ . '/../php/head.php';
 ?>
 <body class="plans-page" data-page="plans">
@@ -58,5 +59,4 @@ require __DIR__ . '/../php/head.php';
     </section>
 
     <script src="../scripts/app.js"></script>
-</body>
-</html>
+<?php require __DIR__ . '/../php/footer.php'; ?>

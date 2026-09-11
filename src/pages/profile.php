@@ -23,5 +23,4 @@ require __DIR__ . '/../php/head.php';
             <article class="account-card"><p class="account-label">Membership</p><h2>Find your fit</h2><p>Explore plans for solo watching, sharing, and more.</p><a class="button button-ghost" href="plans.php">View plans</a></article>
         </section>
     </main>
-</body>
-</html>
+<?php require __DIR__ . '/../php/footer.php'; ?>

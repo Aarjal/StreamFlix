@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0f1a;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1a1a3e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d1b2a;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="star" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#fff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fff;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  <rect width="400" height="600" fill="url(#bg2)"/>
+  <!-- Stars -->
+  <circle cx="50" cy="80" r="1" fill="url(#star)" opacity="0.8"/>
+  <circle cx="120" cy="40" r="1.5" fill="url(#star)" opacity="0.6"/>
+  <circle cx="300" cy="60" r="1" fill="url(#star)" opacity="0.7"/>
+  <circle cx="350" cy="120" r="1" fill="url(#star)" opacity="0.5"/>
+  <circle cx="80" cy="200" r="1" fill="url(#star)" opacity="0.4"/>
+  <circle cx="280" cy="180" r="1.5" fill="url(#star)" opacity="0.6"/>
+  <circle cx="150" cy="300" r="1" fill="url(#star)" opacity="0.5"/>
+  <circle cx="320" cy="250" r="1" fill="url(#star)" opacity="0.7"/>
+  <text x="200" y="260" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#fff" text-anchor="middle">INTERSTELLAR</text>
+  <text x="200" y="320" font-family="system-ui, sans-serif" font-size="14" fill="#aaa" text-anchor="middle">2014 • Sci-Fi</text>
+  <text x="200" y="345" font-family="system-ui, sans-serif" font-size="14" fill="#ffd700" text-anchor="middle">★ 8.7</text>
+  <ellipse cx="200" cy="420" rx="80" ry="10" fill="#4a90d9" opacity="0.4"/>
+</svg>

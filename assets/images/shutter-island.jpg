@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a0f0f;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#2d1515;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a0a0a;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="600" fill="url(#bg3)"/>
+  <!-- Fog/mist effect -->
+  <ellipse cx="200" cy="150" rx="180" ry="60" fill="#3a1a1a" opacity="0.3"/>
+  <ellipse cx="200" cy="200" rx="160" ry="50" fill="#2a1515" opacity="0.4"/>
+  <text x="200" y="280" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#e50914" text-anchor="middle">SHUTTER</text>
+  <text x="200" y="315" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#e50914" text-anchor="middle">ISLAND</text>
+  <text x="200" y="385" font-family="system-ui, sans-serif" font-size="14" fill="#996" text-anchor="middle">2010 • Drama / Mystery</text>
+  <text x="200" y="410" font-family="system-ui, sans-serif" font-size="14" fill="#ffd700" text-anchor="middle">★ 8.2</text>
+  <!-- Lighthouse beam -->
+  <polygon points="200,480 160,580 240,580" fill="#e50914" opacity="0.15"/>
+</svg>
